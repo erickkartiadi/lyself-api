@@ -24,11 +24,5 @@ module.exports = {
     'import/newline-after-import': 'error',
     'import/no-duplicates': 'error',
     'prettier/prettier': 0,
-    'prettier/prettier': [
-      'error',
-      {
-        endofLine: 'auto',
-      },
-    ],
   },
 };
