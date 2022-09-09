@@ -6,7 +6,7 @@ import {
   Post,
   Req,
   UseGuards,
-  ValidationPipe,
+  ValidationPipe
 } from '@nestjs/common';
 import { PrismaClientKnownRequestError } from '@prisma/client/runtime';
 import { CreateUserDto } from 'src/users/dto/create-user.dto';
@@ -23,7 +23,7 @@ export class AuthController {
   @UseGuards(LocalAuthGuard)
   @Post('auth/login')
   async login(@Req() req: RequestWithUser) {
-    return req.user;
+    return this.authService.login(req.user);
   }
 
   @Post('/auth/register')

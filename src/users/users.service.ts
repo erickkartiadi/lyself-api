@@ -10,7 +10,7 @@ export class UsersService {
 
   async create(createUserDto: CreateUserDto): Promise<User> {
     const newUser = await this.prisma.user.create({
-      data: createUserDto,
+      data: createUserDto
     });
 
     return newUser;
@@ -19,8 +19,8 @@ export class UsersService {
   async findOne(email: string): Promise<User | null> {
     const user = await this.prisma.user.findFirst({
       where: {
-        email: email,
-      },
+        email
+      }
     });
 
     return user;

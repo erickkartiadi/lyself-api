@@ -1,9 +1,8 @@
+import { User } from '@prisma/client';
 import { Request } from 'express';
 
-import UserWithoutPassword from './userWithoutPassword.interface';
-
 interface RequestWithUser extends Request {
-  user: UserWithoutPassword;
+  user: User;
 }
 
 export default RequestWithUser;

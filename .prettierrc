@@ -5,5 +5,6 @@
   "arrowParens": "always",
   "quoteProps": "as-needed",
   "semi": true,
-  "printWidth": 90
+  "printWidth": 90,
+  "trailingComma": "none"
 }
