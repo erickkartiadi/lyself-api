@@ -1,13 +1,26 @@
 import { PrismaClient } from '@prisma/client';
+import * as argon2 from 'argon2';
 
 const prisma = new PrismaClient();
 
 async function main() {
   await prisma.user.createMany({
     data: [
-      { name: 'Erick', email: 'erickcartiady@gmail.com' },
-      { name: 'Violetta P. Kartiadi', email: 'violetta.cartiady@gmail.com' },
-      { name: 'Jessyca Kartiadi', email: 'jessycaputrikartiadi@gmail.com' },
+      {
+        name: 'Erick',
+        email: 'erick@gmail.com',
+        password: await argon2.hash('Erick123'),
+      },
+      {
+        name: 'Violetta',
+        email: 'violetta@gmail.com',
+        password: await argon2.hash('Violetta123'),
+      },
+      {
+        name: 'Jessyca',
+        email: 'jessyca@gmail.com',
+        password: await argon2.hash('Jessyca123'),
+      },
     ],
   });
 }

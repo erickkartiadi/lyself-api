@@ -1,4 +1,18 @@
 {
   "cSpell.words": ["lyself", "nestjs"],
-  "material-icon-theme.activeIconPack": "nest"
+  "material-icon-theme.activeIconPack": "nest",
+  "search.exclude": {
+    "**/node_modules": true,
+    "package.json": true,
+    "package-lock.json": true
+  },
+  "files.watcherExclude": {
+    "**/node_modules": true,
+    "**/dist": true
+  },
+  "files.exclude": {
+    "**/node_modules": true,
+    "**/dist": true
+  },
+  "todo-tree.filtering.excludeGlobs": ["**/node_modules/*"]
 }
