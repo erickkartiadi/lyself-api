@@ -6,9 +6,9 @@ import {
   UsePipes,
   ValidationPipe
 } from '@nestjs/common';
-import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
-import RequestWithUser from 'types/requestWithUser.interface';
+import RequestWithUser from 'types/request-with-user.interface';
 
+import { JwtAuthGuard } from '../../auth/guards/jwt-auth.guard';
 import { UsersService } from './users.service';
 
 @Controller('users')
@@ -19,8 +19,6 @@ export class UsersController {
 
   @Get()
   async findAll(@Request() req: RequestWithUser) {
-    console.log(req.user);
-    console.log(process.env.JWT_EXPIRES);
     return this.usersService.findAll();
   }
 }

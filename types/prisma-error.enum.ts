@@ -1,5 +1,5 @@
 enum PrismaError {
-  UniqueViolation = 'P2002',
+  UniqueViolation = 'P2002'
 }
 
 export default PrismaError;

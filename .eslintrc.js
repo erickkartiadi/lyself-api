@@ -3,14 +3,14 @@ module.exports = {
   parserOptions: {
     project: 'tsconfig.json',
     tsconfigRootDir: __dirname,
-    sourceType: 'module',
+    sourceType: 'module'
   },
   extends: ['plugin:@typescript-eslint/recommended', 'plugin:prettier/recommended'],
   plugins: ['@typescript-eslint/eslint-plugin', 'simple-import-sort', 'import'],
   root: true,
   env: {
     node: true,
-    jest: true,
+    jest: true
   },
   ignorePatterns: ['.eslintrc.js'],
   rules: {
@@ -23,6 +23,8 @@ module.exports = {
     'import/first': 'error',
     'import/newline-after-import': 'error',
     'import/no-duplicates': 'error',
+    'no-return-await': 'error',
     'prettier/prettier': 0,
-  },
+    'no-console': 'warn'
+  }
 };
