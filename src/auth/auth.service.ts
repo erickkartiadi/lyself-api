@@ -50,9 +50,7 @@ export class AuthService {
 
   async login(user: User): Promise<{ access_token: string }> {
     const payload: JwtPaylaod = {
-      email: user.email,
-      id: user.id,
-      isConfirmed: user.isConfirmed
+      id: user.id
     };
 
     return { access_token: this.jwtService.sign(payload) };
@@ -75,12 +73,23 @@ export class AuthService {
       to: email,
       subject: 'Email Confirmation',
       text: `
-        Hi ${user.email} 👋🏻, thank you for registering at Lyself.
+        Hi ${user.name} 👋🏻, thank you for registering at Lyself.
 
         Please confirm your email address via the link below:
         ${url}
       `
     });
+  }
+  async decodeConfirmationToken(token: string) {
+    const payload = await this.jwtService.verify(token, {
+      secret: this.configService.get('JWT_VERIFICATION_TOKEN_SECRET')
+    });
+
+    if (typeof payload === 'object' && 'email' in payload) {
+      return payload.email;
+    }
+
+    throw new BadRequestException();
   }
 
   async confirmEmail(email: string) {
@@ -93,9 +102,30 @@ export class AuthService {
     await this.usersService.markEmailAsConfirmed(email);
   }
 
-  async decodeConfirmationToken(token: string) {
+  async sendForgotPasswordLink(email: string) {
+    const payload = { email: email };
+
+    const user = await this.usersService.findByEmail(email);
+    if (!user) throw new InternalServerErrorException();
+
+    const token = this.jwtService.sign(payload, {
+      secret: this.configService.get('JWT_FORGOT_PASS_TOKEN_SECRET'),
+      expiresIn: this.configService.get('JWT_FORGOT_PASS_TOKEN_EXPIRATION')
+    });
+
+    const url = `${this.configService.get('EMAIL_FORGOT_PASS_URL')}/${token}`;
+
+    return this.emailService.sendMail({
+      to: email,
+      subject: 'Forgot Password',
+      text: `Hi ${user.name} 👋🏻,\nYou can change your password via link below:\n${url}
+      `
+    });
+  }
+
+  async decodeForgotPasswordToken(token: string): Promise<string> {
     const payload = await this.jwtService.verify(token, {
-      secret: this.configService.get('JWT_VERIFICATION_TOKEN_SECRET')
+      secret: this.configService.get('JWT_FORGOT_PASS_TOKEN_SECRET')
     });
 
     if (typeof payload === 'object' && 'email' in payload) {

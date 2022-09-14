@@ -1,29 +1,32 @@
 import { Injectable } from '@nestjs/common';
 import { User } from '@prisma/client';
+import * as argon2 from 'argon2';
 import { PrismaService } from 'src/providers/prisma/prisma.service';
 
 import { CreateUserDto } from './dto/create-user.dto';
 
 @Injectable()
 export class UsersService {
-  constructor(private readonly prisma: PrismaService) {}
+  constructor(private prisma: PrismaService) {}
 
   async create(createUserDto: CreateUserDto): Promise<User> {
-    const newUser = await this.prisma.user.create({
+    return this.prisma.user.create({
       data: createUserDto
     });
-
-    return newUser;
   }
 
   async findByEmail(email: string): Promise<User | null> {
-    const user = await this.prisma.user.findFirst({
+    return this.prisma.user.findFirst({
       where: {
         email
       }
     });
+  }
 
-    return user;
+  async findById(id: string): Promise<User | null> {
+    return this.prisma.user.findFirst({
+      where: { id: id }
+    });
   }
 
   async delete(id: string): Promise<User> {
@@ -46,6 +49,15 @@ export class UsersService {
       data: {
         isConfirmed: true
       }
+    });
+  }
+
+  async updatePassword(email: string, newPassword: string) {
+    const hashedPassword = await argon2.hash(newPassword);
+
+    return this.prisma.user.update({
+      where: { email: email },
+      data: { password: hashedPassword }
     });
   }
 }

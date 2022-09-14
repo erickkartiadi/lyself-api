@@ -1,16 +1,7 @@
-import { IsNotEmpty, IsString, Length, Matches } from 'class-validator';
+import { IsString, Matches } from 'class-validator';
 import { PASSWORD_REGEX } from 'constant/constant';
 
-export class CreateUserDto {
-  @IsString()
-  @IsNotEmpty()
-  @Length(2, 255)
-  name: string;
-
-  @IsString()
-  @IsNotEmpty()
-  email: string;
-
+export class ResetPasswordDto {
   @IsString()
   @Matches(PASSWORD_REGEX, {
     message:

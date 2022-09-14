@@ -7,7 +7,7 @@ import * as Mail from 'nodemailer/lib/mailer';
 export default class EmailService {
   private nodemailerTransport: Mail;
 
-  constructor(private readonly configService: ConfigService) {
+  constructor(private configService: ConfigService) {
     this.nodemailerTransport = createTransport({
       service: configService.get('EMAIL_SERVICE'),
       auth: {

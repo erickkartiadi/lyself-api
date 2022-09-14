@@ -15,7 +15,7 @@ import { UsersService } from './users.service';
 @UseGuards(JwtAuthGuard)
 @UsePipes(new ValidationPipe())
 export class UsersController {
-  constructor(private readonly usersService: UsersService) {}
+  constructor(private usersService: UsersService) {}
 
   @Get()
   async findAll(@Request() req: RequestWithUser) {

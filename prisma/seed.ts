@@ -10,18 +10,21 @@ async function main() {
         name: 'Erick',
         email: 'erick@gmail.com',
         password: await argon2.hash('Erick123'),
+        isConfirmed: true
       },
       {
         name: 'Violetta',
         email: 'violetta@gmail.com',
         password: await argon2.hash('Violetta123'),
+        isConfirmed: true
       },
       {
         name: 'Jessyca',
         email: 'jessyca@gmail.com',
         password: await argon2.hash('Jessyca123'),
-      },
-    ],
+        isConfirmed: true
+      }
+    ]
   });
 }
 
