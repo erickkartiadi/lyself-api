@@ -13,4 +13,23 @@ model User {
   name        String
   password    String
   isConfirmed Boolean @default(false)
+  todos       Todo[]
+}
+
+model Todo {
+  id              String              @id @default(auto()) @map("_id") @db.ObjectId
+  todo            String
+  completed       Boolean
+  importanceLevel TodoImportanceLevel @default(none)
+  note            String?
+  reminderTime    DateTime?
+  User            User?               @relation(fields: [userId], references: [id])
+  userId          String?             @db.ObjectId
+}
+
+enum TodoImportanceLevel {
+  high
+  medium
+  low
+  none
 }

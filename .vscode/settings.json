@@ -1,5 +1,5 @@
 {
-  "cSpell.words": ["lyself", "nestjs", "Paylaod"],
+  "cSpell.words": ["lyself", "nestjs", "Paylaod", "todos"],
   "material-icon-theme.activeIconPack": "nest",
   "search.exclude": {
     "**/node_modules": true,

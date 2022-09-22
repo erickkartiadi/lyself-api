@@ -134,4 +134,6 @@ export class AuthService {
 
     throw new BadRequestException();
   }
+
+  // TODO delete user
 }

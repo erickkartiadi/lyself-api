@@ -5,6 +5,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { AuthModule } from './auth/auth.module';
 import { configuration } from './config/configuration';
+import { TodoModule } from './models/todo/todo.module';
 import { UsersModule } from './models/users/users.module';
 
 @Module({
@@ -13,7 +14,8 @@ import { UsersModule } from './models/users/users.module';
       load: [configuration]
     }),
     UsersModule,
-    AuthModule
+    AuthModule,
+    TodoModule
   ],
   controllers: [AppController],
   providers: [AppService]
